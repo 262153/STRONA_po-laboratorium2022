@@ -1,0 +1,38 @@
+<html>
+<body bgcolor="pink"; >
+<style>
+h1 {font-style: coursive;font-size: 50pt ; color:#eb00ac;}
+h2 {font-size: 40pt;color:#8276df;}
+h3 {font-size: 30pt;color:#000000;}
+</style>
+<legend><h1 style="text-align: center;"><strong>{{ meals.meals_name }}</strong></h1></legend>
+
+<h2 style="text-align: left;"> Decsription:</span></h2>
+
+<h3 style="text-align: left;"> {{ meals.description }}</span></h2>
+
+<h2 style="text-align: left;"> Ingredients:</span></h2>
+
+{% for ingredients in meals.ingredients.all %}
+    <h3 style="text-align: left;"> {{ ingredients.ingredients_name }}</span></h3>
+{% endfor %}
+
+<h1 style="text-align: center;"> Opinions:</span></h1>
+
+<form action="{% url 'polls:reaction' meals.id %}" method="post">
+{% csrf_token %}
+
+<fieldset>
+    {% if error_message %}<h3 style="text-align: center;"><strong>{{ error_message }}</strong></h3>{% endif %}
+    
+    {% for choice in meals.review_set.all %}
+        <h3><input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.review }}</label><br></h3>
+    {% endfor %}
+</fieldset>
+
+    <h3 style="text-align: center;"><input type="submit" value="Rate"></h3>
+    
+</form>
+</body>
+</html>

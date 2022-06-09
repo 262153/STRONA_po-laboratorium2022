@@ -1,0 +1,21 @@
+<html>
+<body bgcolor="#8276df";>
+<style>
+h1 {font-style: coursive;font-size: 50pt; color:#000000;  }
+h2 {font-style: coursive;font-size: 40pt }
+</style>
+
+<legend><h1 style="text-align: center;"><strong>{{ meals_list.0.type }}</strong></h1></legend>
+
+{% if meals_list %}
+    <ul>
+    {% for meals in meals_list %}
+        <h2 style="text-align: center;"><a href="{% url 'polls:ingredients' meals.type meals.id%}"><span> #{{ meals.meals_name }}</span></a></h2>
+    {% endfor %}
+    </ul>
+{% else %}
+    <h2 style="text-align: center;">No meals are available.</h2>
+{% endif %}
+
+</body>
+</html>
