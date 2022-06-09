@@ -33,14 +33,14 @@ class ReviewView(generic.DetailView):
         return Meals.objects.filter(pk=self.kwargs['pk']).all()
 
 
-def reaction_vote(request, meals_id):
-    reaction = get_object_or_404(Meals, pk=meals_id)
+def on_vote(request, meals_id):
+    on = get_object_or_404(Meals, pk=meals_id)
     try:
-        selected_choice = reaction.review_set.get(pk=request.POST['choice'])
+        selected_choice = on.review_set.get(pk=request.POST['choice'])
     except (KeyError, Review.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'polls/ingredients.html', {
-            'meals': reaction,
+            'meals': on,
             'error_message': "You didn't select a choice.",
         })
     else:
@@ -49,4 +49,4 @@ def reaction_vote(request, meals_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:review', args=(reaction.id,)))
+        return HttpResponseRedirect(reverse('polls:review', args=(on.id,)))

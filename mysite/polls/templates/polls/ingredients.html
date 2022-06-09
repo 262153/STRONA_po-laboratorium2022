@@ -19,7 +19,7 @@ h3 {font-size: 30pt;color:#000000;}
 
 <h1 style="text-align: center;"> Opinions:</span></h1>
 
-<form action="{% url 'polls:reaction' meals.id %}" method="post">
+<form action="{% url 'polls:on' meals.id %}" method="post">
 {% csrf_token %}
 
 <fieldset>

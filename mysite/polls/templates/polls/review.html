@@ -7,8 +7,7 @@ h1 {font-style: coursive; font-size: 50pt ;color:#25a48f;}
 <h1 style="text-align: left;"><strong>Thank you for your review</strong></h1>
 
 {% for review in result.review_set.all %}
-    <h1 style="text-align: center;">
-        <li>{{ review.review }} -- {{ review.votes }} vote{{ review.votes|pluralize }}</li></h1>
+        <li>{{ review.review }} -- {{ review.votes }} on_vote{{ review.votes|pluralize }}</li></h1>
 {% endfor %}
 </body>
 </html>
